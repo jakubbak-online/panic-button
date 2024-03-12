@@ -1,4 +1,3 @@
-import time
 import threading
 
 # keyboard/os imports
@@ -44,18 +43,13 @@ ThreadTray.start()
 def keyboard_check():
 
     def minimize_windows():
-        keyboard.send("Windows+M")
+        keyboard.send("windows+d")
         print("Done")
 
     keyboard.add_hotkey("9", minimize_windows)
 
-    x = 0
-    while True:
-        time.sleep(1)
-        print(x, end=" ")
-
-        print()
-        x = x + 1
+    shortcut = keyboard.read_hotkey()
+    print(shortcut)
 
 
 ThreadKeyboard = threading.Thread(target=keyboard_check, daemon=True)
