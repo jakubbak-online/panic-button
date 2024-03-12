@@ -38,20 +38,21 @@ ThreadTray.start()
 
 
 # --- THREAD 2 BLOCK ---
-# keyboard.add_hotkey("2+3", print, args=("test",))
+# This thread is daemon, when Thread 1 ends whole program closes
 
 
 def keyboard_check():
-    x = 0
 
+    def minimize_windows():
+        keyboard.send("Windows+M")
+        print("Done")
+
+    keyboard.add_hotkey("9", minimize_windows)
+
+    x = 0
     while True:
         time.sleep(1)
         print(x, end=" ")
-
-        if keyboard.is_pressed("2+3"):
-            print("Pressed", end="")
-        else:
-            pass
 
         print()
         x = x + 1
